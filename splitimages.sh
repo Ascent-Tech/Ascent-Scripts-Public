@@ -33,7 +33,7 @@ do
     # Skip nonjpgs
     filename=$(basename -- "$file")
     extension="${filename##*.}"    
-    if [ ! "$extension" = ".jpg" ]; then
+    if [ ! "$extension" = "jpg" ]; then
         echo "Skipping $file"
         continue
     fi
@@ -41,10 +41,10 @@ do
     num=`exiftool "$dir/$file" |  grep GPS | cut -d " " -f 2 | wc -l`
     # num = num of lines of GPS data in EXIF of photo
     if [ "$num" -eq "0" ]; then
-        echo "Want to copy file $file to: '$dir/Geotagged/$file'"
+        echo "Want to copy file $file to: '$dir/Nongeotagged/$file'"
         cp "$dir/$file" "$dir/Nongeotagged/$file"
     else
-        echo "Want to copy file $file to: '$dir/Nongeotagged/$file'"
+        echo "Want to copy file $file to: '$dir/Geotagged/$file'"
         cp "$dir/$file" "$dir/Geotagged/$file"
     fi
 done
